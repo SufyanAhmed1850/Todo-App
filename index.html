@@ -39,7 +39,7 @@
                             <div>
                                 <div class="radio" onclick="toggleRadio(this)"></div>
                             </div>
-                            <input id="todoItem" class="todoItem" type="text" disabled="true" value="Pakistan">
+                            <input onblur="diableField(this)" id="todoItem" class="todoItem" type="text" disabled="true" value="Pakistan">
                             <div id="edits" class="edits" style="display: none;">
                                 <img id="editBtn" src="./images/icon-pencil.svg" onclick="runEdit(this)" width="20px">
                                 <img id="delBtn" src="./images/icon-cross.svg" onclick="del(this)" width="26px">
