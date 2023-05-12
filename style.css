@@ -77,8 +77,6 @@ body {
 }
 
 .checked {
-    width: 25px;
-    height: 25px;
     background-image: url(./images/Group\ 4.svg);
     background-size: cover;
     border: none;
