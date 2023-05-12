@@ -1,0 +1,149 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --bg: #171823;
+    --clr-head: #FFFFFF;
+    --clr-txt: #C8CBE7;
+    --clr-plc-hld: #767992;
+    --bg-ctnr: #25273D;
+    --clr-radio: #393A4B;
+    --clr-filter-nn: #5B5E7E;
+    --clr-filter-focus: #3A7CFD;
+    --clr-filter-hover: #FFFFFF;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--clr-txt);
+}
+
+.grand-container {
+    display: flex;
+    justify-content: center;
+}
+
+.parent-container {
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--clr-head);
+    font-size: 1.75rem;
+    letter-spacing: .9rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.navbar img,
+.navbar h1 {
+    cursor: pointer;
+}
+
+.todo {
+    background-color: var(--bg-ctnr);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-left: 1.25rem;
+    border-radius: .3125rem;
+}
+
+.field {
+    padding-right: 1.25rem;
+}
+
+.radio {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--clr-radio);
+    cursor: pointer;
+}
+
+.checked {
+    width: 25px;
+    height: 25px;
+    background-image: url(./images/Group\ 4.svg);
+    background-size: cover;
+    border: none;
+}
+
+.todo input {
+    width: 100%;
+    padding: 1.125rem .25rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--clr-txt);
+    background-color: var(--bg-ctnr);
+    outline: none;
+    border: none;
+}
+
+.todo input::placeholder {
+    color: var(--clr-plc-hld);
+}
+
+.container {
+    background-color: var(--bg-ctnr);
+    border-radius: .3125rem;
+    overflow: hidden;
+}
+
+.container .todo {
+    border-bottom: 1px solid var(--clr-radio);
+    border-radius: 0;
+}
+
+.edits {
+    display: none;
+    align-items: center;
+    gap: .8rem;
+    padding: 0 .8rem;
+}
+
+.edits img {
+    cursor: pointer;
+}
+
+.last-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--clr-filter-nn);
+    padding: 1rem 1.25rem;
+}
+
+.last-details p {
+    cursor: pointer;
+}
+
+.last-details p:hover {
+    color: var(--clr-filter-hover);
+}
+
+.focus {
+    color: var(--clr-filter-focus);
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+}
