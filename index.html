@@ -27,37 +27,25 @@
                 </div>
             </nav>
             <div class="todo field">
-                <input id="userTodo" type="text" placeholder="Create a new todo…">
+                <input id="userTodo" type="text" autocomplete="off" spellcheck="false" placeholder="Create a new todo…">
                 <div>
                     <div class="radio" id="submit"></div>
                 </div>
             </div>
             <div class="container">
                 <div id="todoContainer">
-                    <div id="todoContainer">
-                        <div id="todo" class="todo" onmouseover="changesBtn(this, 'over')" onmouseout="changesBtn(this, 'out')">
-                            <div>
-                                <div class="radio" onclick="toggleRadio(this)"></div>
-                            </div>
-                            <input onblur="diableField(this)" id="todoItem" class="todoItem" type="text" disabled="true" value="Pakistan">
-                            <div id="edits" class="edits" style="display: none;">
-                                <img id="editBtn" src="./images/icon-pencil.svg" onclick="runEdit(this)" width="20px">
-                                <img id="delBtn" src="./images/icon-cross.svg" onclick="del(this)" width="26px">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="last-details">
                     <div>
                         <p id="leftItems">0 items left</p>
                     </div>
                     <div class="filters">
-                        <p>All</p>
-                        <p>Active</p>
-                        <p>Completed</p>
+                        <p onclick="showAll()">All</p>
+                        <p onclick="showActive()">Active</p>
+                        <p onclick="showCompleted()">Completed</p>
                     </div>
                     <div>
-                        <p onclick="delAll()" id="allTodo">Clear Completed</p>
+                        <p onclick="delCompleted()" id="allTodo">Clear Completed</p>
                     </div>
                 </div>
             </div>

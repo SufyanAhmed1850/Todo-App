@@ -6,9 +6,15 @@ var userTodo = document.getElementById('userTodo')
 var submit = document.getElementById("submit")
 // -----------------------------------------------------------------------------Get left Count Element
 var leftItems = document.getElementById("leftItems")
+// -----------------------------------------------------------------------------Get All TodoItem
+var allTodo = []
+// -----------------------------------------------------------------------------Get Active TodoItem
+var activeTodo = []
+// -----------------------------------------------------------------------------Get Completed TodoItem
+var completedTodo = []
 // -----------------------------------------------------------------------------Set Old Todo If Todo Is Null
 var oldTodo = ""
-
+// -----------------------------------------------------------------------------Creates A TodoItem---------------------------------------------------------------------------//
 function setTodo() {
     if (!userTodo.value) {
         return
@@ -42,6 +48,8 @@ function setTodo() {
     input.setAttribute('disabled', 'true')
     input.setAttribute('value', userTodo.value)
     input.setAttribute('onblur', "diableField(this)")
+    input.setAttribute('autocomplete', "off")
+    input.setAttribute('spellcheck', "false")
     // -------------------------------------------------------------------------Set Parent Img Attributes
     edits.setAttribute('id', 'edits')
     edits.setAttribute('class', 'edits')
@@ -71,10 +79,10 @@ function setTodo() {
     userTodo.value = ""
     // -------------------------------------------------------------------------Append Parent (Todo) To TodoContainer
     todoContainer.insertBefore(todo, todoContainer.firstChild)
-    // -------------------------------------------------------------------------Get Length Of TodoList
-    var left = todoContainer.children.length
+    getActiveAndCompleted()
     // -------------------------------------------------------------------------Set Length Of TodoList
-    leftItems.innerHTML = left + ' items left'
+    leftItems.innerHTML = activeTodo.length + ' items left'
+    console.log(activeTodo.length)
 }
 // -----------------------------------------------------------------------------Calls setTodo Function On Click
 submit.addEventListener('click', setTodo)
@@ -84,7 +92,23 @@ userTodo.addEventListener('keydown', function (event) {
         setTodo()
     }
 });
-// -----------------------------------------------------------------------------Handles Img On Hover (Pencil <---> Check)
+// -----------------------------------------------------------------------------Gets All && Active && Completed TodoItems----------------------------------------------------//
+function getActiveAndCompleted() {
+    allTodo = []
+    activeTodo = []
+    completedTodo = []
+    var chk = todoContainer.querySelectorAll('.todoItem')
+    var chkArr = [...chk]
+    for (i = 0; i < chkArr.length; i++) {
+        allTodo.push(chkArr[i])
+        if (chkArr[i].style.textDecoration === 'line-through') {
+            completedTodo.push(chkArr[i])
+        } else {
+            activeTodo.push(chkArr[i])
+        }
+    }
+}
+// -----------------------------------------------------------------------------Handles Img On Hover (Pencil <---> Check)----------------------------------------------------//
 function changesBtn(element, mouse) {
     // -------------------------------------------------------------------------Targets Parent Of Edits Div Of Hovered Todo Item
     var edits = element.querySelector('.edits')
@@ -107,7 +131,7 @@ function changesBtn(element, mouse) {
         }
     }
 }
-// -----------------------------------------------------------------------------Enables/Disables Editing On Todo Item
+// -----------------------------------------------------------------------------Enables/Disables Editing On Todo Item--------------------------------------------------------//
 function runEdit(editBtn) {
     // -------------------------------------------------------------------------Targets Todo Item Input
     var todoItem = editBtn.parentElement.parentElement.querySelector('#todoItem')
@@ -129,7 +153,7 @@ function runEdit(editBtn) {
         editBtn.setAttribute('src', './images/icon-pencil.svg')
     }
 }
-// -----------------------------------------------------------------------------On Blur Enables/Disables Editing On Todo Item
+// -----------------------------------------------------------------------------On Blur Enables/Disables Editing On Todo Item------------------------------------------------//
 oldTodo = todoItem.value
 function diableField(element) {
     var todoItem = element
@@ -144,29 +168,71 @@ function diableField(element) {
         editBtn.src = './images/icon-pencil.svg'
     }, 100)
 }
-// -----------------------------------------------------------------------------Deletes A Todo Item & Updates Length Of Todo Items
+// -----------------------------------------------------------------------------Deletes A Todo Item & Updates Length Of Todo Items-------------------------------------------//
 function del(element) {
     // -------------------------------------------------------------------------Deletes A Todo Item
     var todo = element.parentElement.parentElement
     todo.remove()
-    // -------------------------------------------------------------------------Upates Length Of Todo Items
-    var left = todoContainer.children.length
-    leftItems.innerHTML = left + ' items left'
+    getActiveAndCompleted()
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
 }
-// -----------------------------------------------------------------------------Adds Checked Class On Radio
+// -----------------------------------------------------------------------------Adds Checked Class On Radio------------------------------------------------------------------//
 function toggleRadio(element) {
     // -------------------------------------------------------------------------Targetting Radio Btn
-    var radio = element.parentElement.querySelector('.radio')
+    var radio = element
+    var todo = radio.parentNode.parentNode
+    var input = todo.querySelector('#todoItem')
     // -------------------------------------------------------------------------Removes/Add Checked Class To Radio Btn
     if (radio.classList.contains('checked')) {
         radio.classList.remove('checked')
+        input.style.textDecoration = 'none'
+        input.style.color = 'var(--clr-txt)'
     } else {
         radio.classList.add('checked')
+        input.style.textDecoration = 'line-through'
+        input.style.color = '#4D5067'
     }
+    getActiveAndCompleted()
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
 }
-// -----------------------------------------------------------------------------Deletes Completed Todo Items
-function delAll() {
+// -----------------------------------------------------------------------------Deletes Completed Todo Items-----------------------------------------------------------------//
+function delCompleted() {
+    for (i = 0; i < completedTodo.length; i++) {
+        completedTodo[i].parentNode.remove()
+    }
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
+    getActiveAndCompleted()
+}
+// -----------------------------------------------------------------------------Shows Only Completed TodoItems---------------------------------------------------------------//
+function showCompleted() {
     todoContainer.innerHTML = ''
-    var left = todoContainer.children.length
-    leftItems.innerHTML = left + ' items left'
+    for (var i = 0; i < completedTodo.length; i++) {
+        var completedTodoParent = completedTodo[i].parentNode
+        todoContainer.appendChild(completedTodoParent)
+    }
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
+}
+// -----------------------------------------------------------------------------Shows Only Active TodoItems------------------------------------------------------------------//
+function showActive() {
+    todoContainer.innerHTML = ''
+    for (var i = 0; i < activeTodo.length; i++) {
+        var activeTodoParent = activeTodo[i].parentNode
+        todoContainer.appendChild(activeTodoParent)
+    }
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
+}
+// -----------------------------------------------------------------------------Shows All TodoItems--------------------------------------------------------------------------//
+function showAll() {
+    todoContainer.innerHTML = ''
+    for (var i = 0; i < allTodo.length; i++) {
+        var allTodoParent = allTodo[i].parentNode
+        todoContainer.appendChild(allTodoParent)
+    }
+    // -------------------------------------------------------------------------Updates Length Of TodoList
+    leftItems.innerHTML = activeTodo.length + ' items left'
 }
