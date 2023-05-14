@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 :root {
@@ -17,6 +17,25 @@
     --clr-filter-nn: #5B5E7E;
     --clr-filter-focus: #3A7CFD;
     --clr-filter-hover: #FFFFFF;
+    --clr-shadow: #0000001f;
+    --bg-btn: #15151f;
+    --bg-btn-active: #1d1f2e;
+    --clr-btn: #C8CBE7;
+}
+
+.lightTheme {
+    --bg: #FAFAFA;
+    --clr-head: #494C6B;
+    --clr-txt: #494C6B;
+    --clr-plc-hld: #9495A5;
+    --bg-ctnr: #FFFFFF;
+    --clr-radio: #979797;
+    --clr-filter-nn: #9495A5;
+    --clr-filter-focus: #3A7CFD;
+    --clr-filter-hover: #494C6B;
+    --bg-btn: #b6b6b6;
+    --bg-btn-active: #c7c7c7;
+    --clr-btn: #FFFFFF;
 }
 
 body {
@@ -30,11 +49,16 @@ body {
 }
 
 .parent-container {
-    width: 100%;
-    max-width: 540px;
+    width: 90%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.container,
+.field {
+    box-shadow: 0 5px 16px var(--clr-shadow);
 }
 
 .navbar {
@@ -64,8 +88,22 @@ body {
     border-radius: .3125rem;
 }
 
-.field {
-    padding-right: 1.25rem;
+.add-btn {
+    background-color: var(--bg-btn);
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    height: 100%;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-btn);
+}
+
+.add-btn:active {
+    background-color: var(--bg-btn-active);
 }
 
 .radio {
@@ -127,13 +165,15 @@ body {
     font-weight: 600;
     color: var(--clr-filter-nn);
     padding: 1rem 1.25rem;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .last-details p {
     cursor: pointer;
 }
 
-.last-details p:hover {
+.last-details p:hover:not(.focus) {
     color: var(--clr-filter-hover);
 }
 
@@ -144,4 +184,29 @@ body {
 .filters {
     display: flex;
     gap: 1rem;
+    margin: 0 .85rem;
+}
+
+@media screen and (width <=490px) {
+    .todo input {
+        font-size: .9rem;
+    }
+
+    #editBtn {
+        width: 1rem;
+    }
+
+    #delBtn {
+        width: 1.25rem;
+    }
+
+    .last-details p {
+        font-size: .75rem;
+    }
+}
+
+@media screen and (width <=490px) {
+    .filters {
+        flex-direction: column;
+    }
 }

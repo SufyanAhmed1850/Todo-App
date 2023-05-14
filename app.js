@@ -1,3 +1,15 @@
+function theme() {
+    var element = document.body
+    var themeIcon = document.getElementById('themeIcon')
+    element.classList.toggle("lightTheme")
+    if (element.classList == 'lightTheme') {
+        themeIcon.src = './images/icon-moon.svg'
+        themeIcon.style.filter = 'invert(50%)'
+    } else {
+        themeIcon.src = './images/icon-sun.svg'
+        themeIcon.style.filter = 'invert(0%)'
+    }
+}
 // -----------------------------------------------------------------------------Get Todo Container
 var todoContainer = document.getElementById('todoContainer')
 // -----------------------------------------------------------------------------Get User Input
@@ -19,6 +31,7 @@ function setTodo() {
     if (!userTodo.value) {
         return
     }
+    showAll()
     // -------------------------------------------------------------------------Create Parent Todo
     var todo = document.createElement('div')
     // -------------------------------------------------------------------------Create Parent Raido
@@ -82,7 +95,6 @@ function setTodo() {
     getActiveAndCompleted()
     // -------------------------------------------------------------------------Set Length Of TodoList
     leftItems.innerHTML = activeTodo.length + ' items left'
-    console.log(activeTodo.length)
 }
 // -----------------------------------------------------------------------------Calls setTodo Function On Click
 submit.addEventListener('click', setTodo)
@@ -154,7 +166,6 @@ function runEdit(editBtn) {
     }
 }
 // -----------------------------------------------------------------------------On Blur Enables/Disables Editing On Todo Item------------------------------------------------//
-oldTodo = todoItem.value
 function diableField(element) {
     var todoItem = element
     var Todo = element.parentNode
@@ -208,26 +219,44 @@ function delCompleted() {
 }
 // -----------------------------------------------------------------------------Shows Only Completed TodoItems---------------------------------------------------------------//
 function showCompleted() {
-    todoContainer.innerHTML = ''
-    for (var i = 0; i < completedTodo.length; i++) {
-        var completedTodoParent = completedTodo[i].parentNode
-        todoContainer.appendChild(completedTodoParent)
-    }
-    // -------------------------------------------------------------------------Updates Length Of TodoList
-    leftItems.innerHTML = activeTodo.length + ' items left'
+        var all = document.getElementById('all')
+        var active = document.getElementById('active')
+        var completed = document.getElementById('completed')
+        all.classList.remove('focus')
+        active.classList.remove('focus')
+        completed.classList.add('focus')
+        todoContainer.innerHTML = ''
+        for (var i = 0; i < completedTodo.length; i++) {
+            var completedTodoParent = completedTodo[i].parentNode
+            todoContainer.appendChild(completedTodoParent)
+        }
+        // -------------------------------------------------------------------------Updates Length Of TodoList
+        leftItems.innerHTML = activeTodo.length + ' items left'
 }
 // -----------------------------------------------------------------------------Shows Only Active TodoItems------------------------------------------------------------------//
 function showActive() {
-    todoContainer.innerHTML = ''
-    for (var i = 0; i < activeTodo.length; i++) {
-        var activeTodoParent = activeTodo[i].parentNode
-        todoContainer.appendChild(activeTodoParent)
-    }
-    // -------------------------------------------------------------------------Updates Length Of TodoList
-    leftItems.innerHTML = activeTodo.length + ' items left'
+        var all = document.getElementById('all')
+        var active = document.getElementById('active')
+        var completed = document.getElementById('completed')
+        all.classList.remove('focus')
+        active.classList.add('focus')
+        completed.classList.remove('focus')
+        todoContainer.innerHTML = ''
+        for (var i = 0; i < activeTodo.length; i++) {
+            var activeTodoParent = activeTodo[i].parentNode
+            todoContainer.appendChild(activeTodoParent)
+        }
+        // -------------------------------------------------------------------------Updates Length Of TodoList
+        leftItems.innerHTML = activeTodo.length + ' items left'
 }
 // -----------------------------------------------------------------------------Shows All TodoItems--------------------------------------------------------------------------//
 function showAll() {
+    var all = document.getElementById('all')
+    var active = document.getElementById('active')
+    var completed = document.getElementById('completed')
+    all.classList.add('focus')
+    active.classList.remove('focus')
+    completed.classList.remove('focus')
     todoContainer.innerHTML = ''
     for (var i = 0; i < allTodo.length; i++) {
         var allTodoParent = allTodo[i].parentNode
