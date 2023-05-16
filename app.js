@@ -4,7 +4,7 @@ function theme() {
     element.classList.toggle("lightTheme")
     if (element.classList == 'lightTheme') {
         themeIcon.src = './images/icon-moon.svg'
-        themeIcon.style.filter = 'invert(50%)'
+        themeIcon.style.filter = 'invert(80%)'
     } else {
         themeIcon.src = './images/icon-sun.svg'
         themeIcon.style.filter = 'invert(0%)'
