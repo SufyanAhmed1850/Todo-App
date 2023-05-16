@@ -27,7 +27,7 @@ var completedTodo = []
 // -----------------------------------------------------------------------------Set Old Todo If Todo Is Null
 var oldTodo = ""
 // -----------------------------------------------------------------------------Creates A TodoItem---------------------------------------------------------------------------//
-function setTodo(inputLocal) {
+function setTodo(inputLocal, radioClass) {
     showAll()
     if (inputLocal || (!inputLocal && userTodo.value)) {
         // -------------------------------------------------------------------------Create Parent Todo
@@ -50,7 +50,11 @@ function setTodo(inputLocal) {
         todo.setAttribute('onmouseover', "changesBtn(this, 'over')")
         todo.setAttribute('onmouseout', "changesBtn(this, 'out')")
         // -------------------------------------------------------------------------Set Radio Attributes
-        radio.setAttribute('class', 'radio')
+        if (radioClass) {
+            radio.className = radioClass
+        } else {
+            radio.setAttribute('class', 'radio')
+        }
         radio.setAttribute('onclick', 'toggleRadio(this)')
         // -------------------------------------------------------------------------Set Input Field Attributes
         input.setAttribute('id', 'todoItem')
@@ -103,18 +107,20 @@ function setTodo(inputLocal) {
         switch (val) {
             case 'user':
                 toLocal()
-                console.log('user')
                 break
             default:
-                console.log('local')
+                completedStyles()
                 break
         }
+        getActiveAndCompleted()
     } else if (!userTodo.value) {
         return
     }
 }
 // -----------------------------------------------------------------------------Calls setTodo Function On Click
-submit.addEventListener('click', setTodo)
+submit.addEventListener('click', function () {
+    setTodo()
+});
 // -----------------------------------------------------------------------------Calls setTodo Function On Pressing Enter
 userTodo.addEventListener('keydown', function (event) {
     if (event.key == 'Enter') {
@@ -209,6 +215,7 @@ function del(element) {
 }
 // -----------------------------------------------------------------------------Adds Checked Class On Radio------------------------------------------------------------------//
 function toggleRadio(element) {
+    showAll()
     // -------------------------------------------------------------------------Targetting Radio Btn
     var radio = element
     var todo = radio.parentNode.parentNode
@@ -221,13 +228,29 @@ function toggleRadio(element) {
     } else {
         radio.classList.add('checked')
         input.style.textDecoration = 'line-through'
-        input.style.color = '#4D5067'
+        input.style.color = 'var(--clr-disabled-input)'
     }
     getActiveAndCompleted()
     // -------------------------------------------------------------------------Updates Length Of TodoList
     leftItems.innerHTML = activeTodo.length + ' items left'
     // -------------------------------------------------------------------------Calls Function That Sets todoItem To Local
     toLocal()
+}
+// -----------------------------------------------------------------------------Sets Style on todoItems if Radio Is Checked--------------------------------------------------//
+function completedStyles() {
+    var todoItems = todoContainer.children
+    var todoItemsArr = [...todoItems]
+    for (var i = 0; i < todoItemsArr.length; i++) {
+        var checkedRadio = todoItemsArr[i].querySelector('.radio')
+        if (checkedRadio.className.includes('checked')) {
+            var parentOfChecked = checkedRadio.parentNode.parentNode
+            var inputToStyle = parentOfChecked.querySelector('#todoItem')
+            inputToStyle.style.textDecoration = 'line-through'
+            inputToStyle.style.color = 'var(--clr-disabled-input)'
+        } else {
+            continue
+        }
+    }
 }
 // -----------------------------------------------------------------------------Deletes Completed Todo Items-----------------------------------------------------------------//
 function delCompleted() {
@@ -293,20 +316,27 @@ function toLocal() {
     var childTodoItems = todoContainer.querySelectorAll('.todoItem')
     var childTodoItemsArr = [...childTodoItems]
     var childTodoValueArr = []
+    var radioClassArr = []
     for (var i = 0; i < childTodoItemsArr.length; i++) {
         childTodoValueArr.unshift(childTodoItemsArr[i].value)
+        var radio = childTodoItemsArr[i].parentNode.querySelector('.radio')
+        radioClassArr.unshift(radio.className)
     }
     var strChildTodoItemsArr = JSON.stringify(childTodoValueArr)
     localStorage.setItem('localTodoItems', strChildTodoItemsArr)
+    var strRadioClassArr = JSON.stringify(radioClassArr)
+    localStorage.setItem('localRadioClass', strRadioClassArr)
 }
 // -----------------------------------------------------------------------------Gets todoItems From Local Storage---------------------------------------------------------------//
 function getLocal() {
-    var getFromLocal = localStorage.getItem('localTodoItems')
-    var localParse = JSON.parse(getFromLocal)
+    var getLocalRadioClass = localStorage.getItem('localRadioClass')
+    var localRadioParse = JSON.parse(getLocalRadioClass)
+    var getTodoLocalValue = localStorage.getItem('localTodoItems')
+    var localParse = JSON.parse(getTodoLocalValue)
     // -------------------------------------------------------------------------If Local Have todoItemsValue Then It Append todoItem with Value From Local
     if (localParse) {
         for (var i = 0; i <= localParse.length; i++) {
-            setTodo(localParse[i])
+            setTodo(localParse[i], localRadioParse[i])
         }
     }
 } getLocal()

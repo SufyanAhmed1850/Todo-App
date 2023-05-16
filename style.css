@@ -14,12 +14,13 @@
     --clr-plc-hld: #767992;
     --bg-ctnr: #25273D;
     --clr-radio: #393A4B;
+    --clr-disabled-input: #4D5067;
     --clr-filter-nn: #5B5E7E;
     --clr-filter-focus: #3A7CFD;
     --clr-filter-hover: #FFFFFF;
     --clr-shadow: #0000001f;
-    --bg-btn: #15151f;
-    --bg-btn-active: #1d1f2e;
+    --bg-btn: #0f0f18;
+    --bg-btn-active: #13131f;
     --clr-btn: #C8CBE7;
 }
 
@@ -30,11 +31,12 @@
     --clr-plc-hld: #9495A5;
     --bg-ctnr: #FFFFFF;
     --clr-radio: #979797;
+    --clr-disabled-input: #b6b6b6;
     --clr-filter-nn: #9495A5;
     --clr-filter-focus: #3A7CFD;
     --clr-filter-hover: #494C6B;
-    --bg-btn: #b6b6b6;
-    --bg-btn-active: #c7c7c7;
+    --bg-btn: #7F7F7F;
+    --bg-btn-active: #999999;
     --clr-btn: #FFFFFF;
 }
 
@@ -59,6 +61,11 @@ body {
 .container,
 .field {
     box-shadow: 0 5px 16px var(--clr-shadow);
+}
+
+#todoContainer {
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .navbar {
