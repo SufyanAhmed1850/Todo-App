@@ -178,6 +178,10 @@ body {
     border-radius: 0;
 }
 
+.container .todo input{
+    cursor: grab;
+}
+
 .edits {
     display: none;
     align-items: center;
@@ -235,9 +239,7 @@ body {
     .last-details p {
         font-size: .75rem;
     }
-}
 
-@media screen and (width <=490px) {
     .filters {
         flex-direction: column;
     }

@@ -340,3 +340,9 @@ function getLocal() {
         }
     }
 } getLocal()
+new Sortable(todoContainer, {
+    animation: 150,
+    onEnd: function () {
+        toLocal();
+    }
+});
