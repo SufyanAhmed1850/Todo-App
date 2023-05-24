@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
-    <link rel="shortcut icon" href="./images/original-b99606f0bb8913dfbcde163dea64f79f-removebg-preview (1).png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./images/original-b99606f0bb8913dfbcde163dea64f79f-removebg-preview (1).png"
+        type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <main class="grand-container">
@@ -19,27 +21,33 @@
                     <h1>TODO</h1>
                 </div>
                 <div onclick="theme()">
-                    <img id="themeIcon" src="./images/icon-sun.svg">
+                    <img id="themeIcon" src="./images/icon-sun.svg" />
                 </div>
             </nav>
             <div class="todo field">
-                <input id="userTodo" type="text" autocomplete="off" spellcheck="false" placeholder="Create a new todo…">
+                <input id="userTodo" type="text" autocomplete="off" spellcheck="false"
+                    placeholder="Create a new todo…" />
                 <p class="add-btn" id="submit">Add</p>
             </div>
             <div class="container">
-                <div id="todoContainer">
-                </div>
+                <div id="todoContainer"></div>
                 <div class="last-details">
                     <div>
                         <p id="leftItems">0 items left</p>
                     </div>
                     <div class="filters">
-                        <p id="all" class="focus" onclick="showAll()">All</p>
+                        <p id="all" class="focus" onclick="showAll()">
+                            All
+                        </p>
                         <p id="active" onclick="showActive()">Active</p>
-                        <p id="completed" onclick="showCompleted()">Completed</p>
+                        <p id="completed" onclick="showCompleted()">
+                            Completed
+                        </p>
                     </div>
                     <div>
-                        <p onclick="delCompleted()" id="allTodo">Clear Completed</p>
+                        <p onclick="delCompleted()" id="allTodo">
+                            Clear Completed
+                        </p>
                     </div>
                 </div>
             </div>

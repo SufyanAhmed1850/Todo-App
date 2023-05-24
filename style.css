@@ -24,6 +24,7 @@
     --clr-btn: #C8CBE7;
     --bg-track: #404149;
     --clr-thumb: #c5c5c5;
+    --clr-bottom-border: #343546;
 }
 
 .lightTheme {
@@ -42,6 +43,7 @@
     --clr-btn: #FFFFFF;
     --bg-track: #b4b4b4;
     --clr-thumb: #424242;
+    --clr-bottom-border: #97979736;
 }
 
 body {
@@ -73,18 +75,35 @@ body {
     overflow-y: auto;
 }
 
+/* -----Scrollbar Styles For Firefox----- */
+#todoContainer {
+    scrollbar-color: var(--clr-thumb) var(--bg-track);
+    scrollbar-width: thin;
+}
+
+#todoContainer::-moz-scrollbar {
+    width: 8px;
+}
+
+#todoContainer::-moz-scrollbar-thumb {
+    background-color: var(--clr-thumb);
+}
+
+#todoContainer::-moz-scrollbar-track {
+    background-color: var(--bg-track);
+}
+
+/* -----Scrollbar Styles For Other Browsers----- */
 #todoContainer::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: var(--bg-track);
-    padding: 50px 0;
 }
 
 #todoContainer::-webkit-scrollbar {
     width: 8px;
     border-radius: 10px;
     background-color: var(--bg-track);
-    padding: 50px 0;
 }
 
 #todoContainer::-webkit-scrollbar-thumb {
@@ -111,13 +130,20 @@ body {
     cursor: pointer;
 }
 
+.field {
+    padding-left: 1.25rem;
+}
+
 .todo {
     background-color: var(--bg-ctnr);
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    padding-left: 1.25rem;
     border-radius: .3125rem;
+}
+
+.todoCtnr {
+    padding-left: .75rem;
 }
 
 .add-btn {
@@ -138,12 +164,35 @@ body {
     background-color: var(--bg-btn-active);
 }
 
+.sort {
+    cursor: grab;
+}
+
+.sort:active,
+.sort.is-dragging {
+    cursor: grabbing;
+}
+
+.sort img {
+    width: 20px;
+}
+
+img {
+    display: block;
+}
+
 .radio {
     width: 24px;
     height: 24px;
     border-radius: 50%;
     border: 1px solid var(--clr-radio);
     cursor: pointer;
+}
+
+.radioParent {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
 }
 
 .checked {
@@ -174,12 +223,8 @@ body {
 }
 
 .container .todo {
-    border-bottom: 1px solid var(--clr-radio);
+    border-bottom: 1px solid var(--clr-bottom-border);
     border-radius: 0;
-}
-
-.container .todo input{
-    cursor: grab;
 }
 
 .edits {
