@@ -240,7 +240,10 @@ function del(element) {
 }
 // -----------------------------------------------------------------------------Adds Checked Class On Radio------------------------------------------------------------------//
 function toggleRadio(element) {
-    showAll();
+    var all = document.getElementById("all");
+    if(!all.classList.contains("focus")){
+        showAll();
+    }
     // -------------------------------------------------------------------------Targetting Radio Btn
     var radio = element;
     var todo = radio.parentNode.parentNode;
